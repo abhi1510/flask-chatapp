@@ -16,7 +16,11 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <ul id="messages"></ul>
+                        <ul id="messages">
+                            {% for chat in chats %}
+                            <li>{{ chat.message }}</li>
+                            {% endfor %}
+                        </ul>
                         <input type="text" id="msgInput">
                         <button class="btn btn-sm btn-primary" id="sendMsg">Send</button>
                     </div>
