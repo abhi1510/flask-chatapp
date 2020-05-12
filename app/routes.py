@@ -1,10 +1,12 @@
 from flask import render_template
+from flask_login import login_required
 from flask_socketio import send
 
 from app import app, db, socketio
 from app.models import ChatHistory
 
 @app.route('/')
+@login_required
 def index():
     chats = ChatHistory.query.all()
     return render_template('index.html', chats=chats)
