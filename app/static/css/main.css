@@ -1,5 +1,10 @@
 * {
-    font-family: Montserrat,"Helvetica Neue",Arial,sans-serif;
+    font-family: 'Jost', sans-serif;
+}
+
+:root {
+    --p800: #080096;
+    --p700: #2F1082;
 }
 
 
@@ -11,22 +16,21 @@
 }
 
 #sidebar {
-    width: 300px;
+    width: 250px;
     position: relative;
     top: 0;
     left: 0;
     height: 100vh;
     z-index: 999;
-    background-color: #fff;
+    background-color: var(--p700);
     transition: all 0.3s;
-    border-right: 1px solid gray;
     overflow-y: auto;
 }
 
 #sidebar .header {
     padding: 1rem;
     color: #fff;
-    background-color: var(--primary);
+    background-color: var(--p800);
 }
 
 #sidebar .header .user-img {
@@ -36,7 +40,7 @@
 }
 
 #sidebar .header .user-info {
-    width: 75%;
+    width: 68%;
 }
 
 #sidebar .header .user-info p{
@@ -50,7 +54,7 @@
 #sidebar .search .form-control{
     border: 0;
     border-radius: 0;
-    background-color: #19232d;
+    background-color: #000;
 }
 
 #sidebar .sidebar-menu {
@@ -60,36 +64,29 @@
 }
 
 #sidebar .sidebar-menu li {
-    padding: 0.5rem 1rem;
+    padding: 5px 1.5rem;
+    font-size: 15px;
     cursor: pointer;
+    color: #ddd;
 }
 
 #sidebar .sidebar-menu li:hover {
     color: white;
-    background-color: var(--secondary);
 }
 
-
-#sidebar .sidebar-menu li img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+#sidebar .sidebar-menu li.active {
+    color: white;
 }
 
-#sidebar .sidebar-menu li .room {
-    width: 80%;
-    margin-top: 5px;
-}
-
-#sidebar .sidebar-menu li .room p {
-    font-size: 10px;
+#sidebar .sidebar-menu li i {
+    font-size: 12px;
 }
 
 #content {
     position: absolute;
     top: 0;
     right: 0;
-    width: calc(100% - 300px);
+    width: calc(100% - 250px);
     height: 100vh;
     transition: all 0.3s; 
     background-color: rgb(255, 255, 255);
@@ -164,5 +161,9 @@
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;;
+}
+
+@media only screen and (max-width: 600px) {
+
 }
 

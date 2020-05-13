@@ -2,43 +2,31 @@
 
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="">Chat App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<div class="wrapper">
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Hello {{ current_user.username | title }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">
-                        Logout
-                    </a>
-                </li>
-            </ul>
+    {% include 'partials/sidebar.html' %}
+    <div id="content">
+        {% include 'partials/navbar.html' %}
+        <div class="message-section">
+            {% for chat in chats %}
+            <p>{{chat.author.username}} {{chat.message}}</p>
+            {% endfor %}
         </div>
-    </div>
-</nav>
-
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-lg-6">
-            <ul id="messages">
-                {% for chat in chats %}
-                <li>{{ chat.message }}</li>
-                {% endfor %}
-            </ul>
-            <input type="text" id="msgInput" class="form-control">
-            <button class="btn btn-sm btn-primary" id="sendMsg">Send</button>
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="userMessage" class="form-control form-control-lg"
+                    placeholder="Type a message here.." autocomplete="off">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="sendMsg">
+                        <i class="fa fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6"></div>
     </div>
 </div>
+
+
 
 {% endblock %}
 
@@ -50,14 +38,14 @@
     $(document).ready(() => {
         var socket = io();
         socket.on('connect', () => {
-            socket.send('User Connected!');
+            console.log('Connected!!!')
         });
         socket.on('message', (data) => {
-            $('#messages').append(`<li>${data}</li>`)
+            $('.message-section').append(`<p>${data.author}: ${data.msg}</p>`)
         });
 
         $('#sendMsg').click(() => {
-            let msgEl = $('#msgInput');
+            let msgEl = $('#userMessage');
             socket.send(msgEl.val());
             msgEl.val('');
         })
